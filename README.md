@@ -1,0 +1,1 @@
+# Word2vec-on-Farsi-Literature
