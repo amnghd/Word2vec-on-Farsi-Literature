@@ -1,21 +1,23 @@
 # Word2vec model for Farsi literature
 
-This document is dedicated to providing a word2vec model developed for Farsi poems of 48 poets. The complete list of poets and their documents are avaialble [here](https://github.com/amnghd/Persian_poems_corpus).
+This document is dedicated to providing a word2vec model developed for Farsi poems of 48 poets. The complete list of poets and their documents are available [here](https://github.com/amnghd/Persian_poems_corpus).
 
 ## Brief introduction to Farsi poems:
 
 Traditional Farsi poems are a set of sentence rows know as ``beyts``. Each beyt is split into two ``mesra`` that could be thought of as clauses that complete each other to form a meaningful sentence.
-Most of the exisiting Farsi literature are composed in this frame work of mesra and beyts. Here is an example of a Farsi poem by [Rumi](https://en.wikipedia.org/wiki/Rumi):
+Most of the existing Farsi literature are composed in this framework of mesra and beyts. Here is an example of a Farsi poem by [Rumi](https://en.wikipedia.org/wiki/Rumi):
 
+``
 **(beyt1-mesra1)**
 
-Out beyond ideas of wrongdoing and rightdoing,
+Out beyond ideas of wrongdoing and right-doing,
 
 **(beyt1-mesra2)**
 
 there is a field.  I'll meet you there.
 
 **(beyt2-mesra1)**
+
 When the soul lies down in that grass,
 
 **(beyt2-mesra2)**
@@ -29,15 +31,45 @@ Ideas, language, even the phrase each other
 **(beyt3-mesra2)**
 doesn't make any sense.
 
+``
+
 ## About this corpus:
 
-This corpus consists of $$$$ mesras of Farsi poems from 48 poets. Moreover, this document consists of $$$ unique words.
+This corpus consists of 1,216,286 mesras of Farsi poems that can be thought of as 608,143 sentences. from 48 poets. 
+Moreover, this document consists of 8,102,119 words of which 148,588 are unique.
 
 ## Word2vec model:
 
-The deveoped word2vec model is accessible [here]().
+The developed word2vec model is accessible [here](https://github.com/amnghd/Word2vec-on-Farsi-Literature/tree/master/word2vec%20model).
 
 ## Demonstration:
 
 Here are some examples of the results of this model:
 
+### Example 1:
+``گوش به چشم شبیه شنیده است:
+دیده``
+
+Which means:
+
+``Ear to eye is as heard to:
+Saw``
+
+### Example 2:
+مرد به زن شبیه آدم است:
+حوا
+
+Which means:
+``Man to woman is as Adam to :
+Eve``
+
+Which means:
+``Ear to eye is as heard to:
+Saw``
+
+
+
+## Limitation:
+
+Please note that the model capability is limited to its data size which is 8 million number of words.
+Moreover, due to different format and vocabulary between Farsi poems and nowadays day to day conversations, these results may not be well generalized.
