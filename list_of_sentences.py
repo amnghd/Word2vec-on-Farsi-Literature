@@ -43,24 +43,32 @@ cache["unique_words"] = unique_words  # unique words to be used
 cache["sentence_min_max"] = (sentence_min_len, sentence_max_len)  # range
 cache["num_mesra"] = len(list_of_sentences)  # number of mesras
 
-print("There are {} number of mesras in this document.\".format(cache["num_mesra"]))
+print("There are {} number of mesras in this document.".format(cache["num_mesra"]))
 print("Mesra length range from {} words to {} words.".format(sentence_min_len, sentence_max_len))
 print("There are {} unique words in this document.".format(cache["num_of_uwords"]))
 print("There are {} unique characters in this document.".format(cache["num_of_chars"]))
 print("In total there are {} words in this document.".format(cache["num_of_words"]))
 
+# following hyper parameters are checked to finalize propoer hyperparameters
+# size in [10, 100, 1000]
+# window in [5, 40, 320]
+# min_count in [1, 10, 100]
 # developing the word2vec funtion
+
+size = 100
+window = 5
+min_count =100
 model = Word2Vec(
-        list_of_sentences,
-        size=100,
-        window=6,
-        min_count=10,
-        workers=4)
+                list_of_sentences,
+                size=size,
+                window=window,
+                min_count=min_count,
+                workers=4)
 model.train(list_of_sentences, total_examples=len(list_of_sentences), epochs=10)
 
 # testing if it makes sense
 w1 = u'خدا'
-print("Few most similar words to \"" + w1 + "\" are:\n" + "\n".join(str(word) +":" + str(ratio) for word, ratio in model.wv.most_similar(positive=w1, topn=10)))
+print("Few most similar words to \"" + w1 + "\" are:\n" + "\n".join(str(word) +":" + str(ratio) for word, ratio in model.wv.most_similar(positive=w1, topn=3)))
 
 # let's perform an anlogy test between woman, man, adam, and eve
 pos1 = u'زن'  # reason
@@ -75,6 +83,24 @@ pos2 = u'شنیده'
 neg = u'گوش'
 result = model.wv.most_similar(positive=[pos1, pos2], negative=[neg])
 print(neg + u" به " + pos1 + " شبیه " + pos2 + " است:\n{}".format(*result[0]))
+
+
+# this example is very important
+
+pos1 = u'رستم'  # reason
+pos2 = u'پدر'
+neg = u'زال'
+result = model.wv.most_similar(positive=[pos1, pos2], negative=[neg])
+print(neg + u" به " + pos1 + " شبیه " + pos2 + " است:\n{}".format(*result[0]))
+
+
+pos1 = u'زلیخا'  # reason
+pos2 = u'مجنون'
+neg = u'یوسف'
+result = model.wv.most_similar(positive=[pos1, pos2], negative=[neg])
+print(neg + u" به " + pos1 + " شبیه " + pos2 + " است:\n{}".format(*result[0]))
+
+
 
 # saving the model vector into a txt file
 model.wv.save_word2vec_format(r'word2vec model/farsi_literature_word2vec_model_min50.txt', binary=False)
